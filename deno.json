@@ -1,12 +1,12 @@
 {
   "tasks": {
     "solve": "deno run --allow-read scripts/solve.ts",
-    "test": "deno test --allow-read",
-    "scaffold": "deno run --allow-read --allow-write scripts/scaffold.ts"
+    "test": "deno test  --allow-read",
+    "scaffold": "deno run --env-file --allow-env --allow-read --allow-write --allow-net scripts/scaffold.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1",
-    "@std/data-structures": "jsr:@std/data-structures@^1.0.4",
-    "@std/fs": "jsr:@std/fs@^1.0.6"
+    "@std/assert": "jsr:@std/assert@^1.0.14",
+    "@std/data-structures": "jsr:@std/data-structures@^1.0.9",
+    "@std/fs": "jsr:@std/fs@^1.0.19"
   }
 }
