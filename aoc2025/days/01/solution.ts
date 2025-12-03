@@ -38,11 +38,16 @@ export function partTwo(input: string): number {
     const { direction, value } = rotation;
 
     const change = direction === "L" ? -value : value;
-    const diff = dial + change;
-    dial = ((diff % 100) + 100) % 100;
+    const target = dial + change;
 
-    const wraps = Math.abs(Math.floor(diff / 100));
-    code += wraps;
+    if (direction === "L") {
+      code += Math.ceil(dial / 100) - Math.ceil(target / 100);
+    } else {
+      code += Math.floor(target / 100);
+    }
+
+    // Normalize dial to 0-99 for the next step
+    dial = ((target % 100) + 100) % 100;
   }
 
   return code;
