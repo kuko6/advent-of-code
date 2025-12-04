@@ -8,24 +8,6 @@ function parseInput(input: string) {
   });
 }
 
-function checkDuplicates(id: number): boolean {
-  const stringId = String(id);
-  let start = 0;
-  let length = 1;
-  let end = 1;
-  while (length < stringId.length) {
-    console.log(stringId.slice(start, end), stringId.slice(end, end + length));
-    if (stringId.slice(start, end), stringId.slice(end, end + length)) {
-      return true;
-    }
-
-    length++;
-    end = start + length;
-  }
-
-  return false;
-}
-
 export function partOne(input: string): number {
   const data = parseInput(input);
 
@@ -49,9 +31,32 @@ export function partOne(input: string): number {
   return res;
 }
 
+function checkIDs(id: number) {
+  const stringID = String(id);
+  const idLen = stringID.length;
+  for (let len = 1; len <= idLen / 2; len++) {
+    if (idLen % len != 0) continue;
+
+    if (stringID.slice(0, len).repeat(idLen / len) === stringID) {
+      return id;
+    }
+  }
+
+  return 0;
+}
+
 export function partTwo(input: string): number {
   const data = parseInput(input);
+
   let res = 0;
+  for (const idRange of data) {
+    const { start, end } = idRange;
+    let id = start;
+    while (id <= end) {
+      res += checkIDs(id);
+      id++;
+    }
+  }
 
   return res;
 }
